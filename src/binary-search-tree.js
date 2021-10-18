@@ -46,9 +46,9 @@ module.exports = class BinarySearchTree {
   }
 
   has(data) {
-    return findNodeWithin(this.rootNode, data);
+    return hasNodeWithin(this.rootNode, data);
 
-    function findNodeWithin(node, value) {
+    function hasNodeWithin(node, value) {
       if(!node) {
         return false
       }
@@ -57,14 +57,26 @@ module.exports = class BinarySearchTree {
       }
 
       return node.data > value ?
-        findNodeWithin(node.left, value) :
-        findNodeWithin(node.right, value);
+        hasNodeWithin(node.left, value) :
+        hasNodeWithin(node.right, value);
     }
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(data) {
+    return findNodeWithin(this.rootNode, data);
+
+    function findNodeWithin(node, value) {
+      if(!node) {
+        return null;
+      }
+      if(node.data === value) {
+        return node;
+      }
+
+      return node.data > value ?
+        findNodeWithin(node.left, value) :
+        findNodeWithin(node.right, value);
+    }
   }
 
   remove(/* data */) {
