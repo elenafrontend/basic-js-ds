@@ -19,7 +19,69 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  */
 
-module.exports = function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+module.exports = function removeKFromList(l, k) {
+  let current = l;
+  let prev;
+  
+  while(current.next) {
+    if (current.value === k) {
+
+      if(prev) {
+        prev.next = current.next
+        prev = current;
+      } else {
+        l = current.next;
+      }
+    } else {
+      prev = current;
+    }
+    current = current.next;
+  }
+  return l;
 }
+
+/* const { testOptional, ListNode } = require('../extensions/index.js');
+
+function convertArrayToList(arr) {
+  return arr.reverse().reduce((acc, cur) => {
+    if (acc) {
+      const node = new ListNode(cur);
+      node.next = acc;
+      return node;
+    }
+
+    return new ListNode(cur);
+  }, null);
+}
+
+const k = 3
+const l = convertArrayToList([3, 1, 2, 3, 4, 5])
+
+function removeKFromList(l, k) {
+  let current = l;
+  let prev;
+  
+  while(current.next) {
+    console.log('Current before:', current)
+    
+    if (current.value === k) {
+
+      if(prev) {
+        prev.next = current.next
+        prev = current;
+      } else {
+        l = current.next;
+        console.log(l)
+      }
+    } else {
+      prev = current;
+    }
+    current = current.next;
+    console.log('Current after:', current)
+  }
+
+  console.log(l)
+}
+
+removeKFromList(l, k);
+*/
